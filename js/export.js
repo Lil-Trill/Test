@@ -11,6 +11,8 @@ $('.btn-export').on('click', function(event){
         },
         success: function(data){
             console.log(data);
+            if(data == 1) alert("файл успешно экспортирован в filesCSV")
+            else alert("произошла ошибка :(");
         }
     })
 })
