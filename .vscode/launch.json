@@ -12,6 +12,7 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\js\\parserCSV.js",
+            "runtimeExecutable": "node",
             "console": "integratedTerminal"
         }
     ]

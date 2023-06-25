@@ -6,6 +6,8 @@
     <title>Document</title>
     <script defer src="./js/libraries/jquery.js"></script>
     <script defer src="./js/export.js"></script>
+    <script defer src="./js/import.js"></script>
+    <script defer src="./js/parserCSV.js"></script>
 </head>
 <body>
     <?php
@@ -20,6 +22,12 @@
         $core = new Core();
         $allData = $core->connect->query("SELECT * FROM `product` WHERE 1")
     ?>
+
+    <form id="uploader" name="uploader" enctype="multipart/form-data" method="POST">
+    <input id="upload-file" name="upload-file" type="file" onchange="downloadFile(this)"/>
+    <button type="submit" name="load">Загрузить</button>
+    </form>
+
 
     <div class="container-products">
         <?php
