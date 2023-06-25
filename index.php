@@ -13,8 +13,6 @@
     <?php
         require './config.php';
         include './api/core.php';
-        include './api/export.php';
-        include './api/import.php';
 
         // $connect = inc();
         // $allData = $connect->query("SELECT * FROM `product` WHERE 1");
