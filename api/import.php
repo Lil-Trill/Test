@@ -14,7 +14,6 @@ class Import extends Core{
         $allID = $this->connect->query("SELECT `id` FROM `product` WHERE 1");
         while($row = $allID->fetch_assoc()){
             if($row['id'] == $this->arrayCSV['id']){
-                
                 return $this->updateDB();
             } 
                 
@@ -34,7 +33,7 @@ class Import extends Core{
 
         var_dump($name);
 
-        if($this->connect->query("INSERT INTO `product` (`id`, `name`, `name_trans`, `price`, `small_text`, `big_text`, `user_id`) VALUES (null, '$name', '$name_trans',  $price, '$small_text', '$big_text', $user_id)"))return "данные успешно добавлены";
+        if($this->connect->query("INSERT INTO `product` (`id`, `name`, `name_trans`, `price`, `small_text`, `big_text`, `user_id`) VALUES (null, '$name', '$name_trans',  $price, '$small_text', '$big_text', null)"))return "данные успешно добавлены";
         else return "данные не были отправлены".$this->connect->error;
         
         
@@ -48,17 +47,17 @@ class Import extends Core{
         $big_text = $this->arrayCSV['big_text'];
         $user_id = $this->arrayCSV['user_id'];
         $id = $this->arrayCSV['id'];
-        if($user_id == '') $user_id = null;
+        if($user_id == '') $user_id = NULL;
         var_dump($user_id);
         if($this->connect->query("UPDATE `product`
         SET name = '$name',
         name_trans = '$name_trans',
-        price = $price,
+        price = 0,
         small_text = '$small_text',
         big_text = '$big_text',
-        user_id =  $user_id
+        user_id = null
         WHERE id = $id")) return "данные обнавлены успешно";
-        else return "Ошибка".$this->connect->error;
+        else return "Ошибка ".$this->connect->error;
     }
 }
 
