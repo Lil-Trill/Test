@@ -8,7 +8,6 @@
 // })
 
 function downloadFile(file){
-    var text;
     var file = document.getElementById("upload-file").files[0],
       ext = "не определилось",
       parts = file.name.split('.');
@@ -46,7 +45,7 @@ function pushData(text){
         tableCSV: text
     },
     success:function(data){
-      console.log(data);
+      alert(data);
     }
   })
 }

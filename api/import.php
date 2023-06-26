@@ -4,9 +4,23 @@ class Import extends Core{
     
     private $arrayCSV;
 
+    public $name; 
+    public $name_trans;
+    public $price;
+    public $small_text;
+    public $big_text;
+    public $user_id;
+    public $id; 
     public function __construct($array){
         parent::__construct();
         $this->arrayCSV = $array;
+        $this->name =  $this->arrayCSV['name'];
+        $this->name_trans = $this->arrayCSV['name_trans'];
+        $this->price = $this->arrayCSV['price'];
+        $this->small_text = $this->arrayCSV['small_text'];
+        $this->big_text = $this->arrayCSV['big_text'];
+        $this->user_id = $this->arrayCSV['user_id'];
+        $this->id = $this->arrayCSV['id'];
     }
 
 
@@ -23,57 +37,29 @@ class Import extends Core{
     }
 
     public function sendNewData(){
-        $name =  $this->arrayCSV['name'];
-        $name_trans = $this->arrayCSV['name_trans'];
-        $price = $this->arrayCSV['price'];
-        $small_text = $this->arrayCSV['small_text'];
-        $big_text = $this->arrayCSV['big_text'];
-        $user_id = $this->arrayCSV['user_id'];
-        $id = $this->arrayCSV['id'];
 
-        var_dump($name);
+        var_dump($this->name);
 
-        if($this->connect->query("INSERT INTO `product` (`id`, `name`, `name_trans`, `price`, `small_text`, `big_text`, `user_id`) VALUES (null, '$name', '$name_trans',  $price, '$small_text', '$big_text', null)"))return "данные успешно добавлены";
+        if($this->connect->query("INSERT INTO `product` (`id`, `name`, `name_trans`, `price`, `small_text`, `big_text`, `user_id`) VALUES ($this->id, '$this->name', '$this->name_trans',  $this->price, '$this->small_text', '$this->big_text', null)"))return "данные успешно добавлены";
         else return "данные не были отправлены".$this->connect->error;
         
         
     }
 
     public function updateDB(){
-        $name =  $this->arrayCSV['name'];
-        $name_trans = $this->arrayCSV['name_trans'];
-        $price = $this->arrayCSV['price'];
-        $small_text = $this->arrayCSV['small_text'];
-        $big_text = $this->arrayCSV['big_text'];
-        $user_id = $this->arrayCSV['user_id'];
-        $id = $this->arrayCSV['id'];
-        if($user_id == '') $user_id = NULL;
-        var_dump($user_id);
+      
+        if($this->user_id == '') $user_id = NULL;
+        var_dump($this->user_id);
         if($this->connect->query("UPDATE `product`
-        SET name = '$name',
-        name_trans = '$name_trans',
+        SET name = '$this->name',
+        name_trans = '$this->name_trans',
         price = 0,
-        small_text = '$small_text',
-        big_text = '$big_text',
+        small_text = '$this->small_text',
+        big_text = '$this->big_text',
         user_id = null
-        WHERE id = $id")) return "данные обнавлены успешно";
+        WHERE id = $this->id")) return "данные обнавлены успешно";
         else return "Ошибка ".$this->connect->error;
     }
 }
 
-//вставка в бд:
-// INSERT INTO `product` (`id`, `name`, `name_trans`, `price`, `small_text`, `big_text`, `user_id`) VALUES (NULL, 'Блендер', NULL, '4000', 'Погружной блендер', 'Погружной блендер оптимален для применения в бытовых условиях. Модель имеет три насадки: для измельчения, венчик и миксер. За счет этого устройство можно использовать для выполнения разных кулинарных операций. Управление осуществляется электронным способом посредством чувствительных кнопок. Модель поддерживает две скорости, регулировка которых происходит плавно. Это позволяет контролировать показатель в зависимости от потребностей. Чаша измельчителя имеет объем 500 мл. За счет этого за один раз можно переработать оптимальное количество ингредиентов.', NULL);
 
-//обновление данных
-// UPDATE `product`
-// SET name = "Телевизор"
-// WHERE id = 1
-
-// "UPDATE `product`
-//         SET name = '$this->arrayCSV[name]',
-//         name_trans = '$this->arrayCSV[name_trans]',
-//         price = '$this->arrayCSV[price]',
-//         small_text = '$this->arrayCSV[small_text]',
-//         big_text = '$this->arrayCSV[big_text]',
-//         user_id = '$this->arrayCSV[user_id]'
-//         WHERE id = '$this->arrayCSV[id]'"

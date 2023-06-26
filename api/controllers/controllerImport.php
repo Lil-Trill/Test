@@ -4,13 +4,6 @@ include '../import.php';
 include $_SERVER['DOCUMENT_ROOT'].'/test/config.php';
 
 $stringCSV = str_replace("\n",";",$_POST['tableCSV']); 
-// $stringCSV = explode("\n",$_POST['tableCSV']);
-// str_getcsv(
-//     string $stringCSV,
-//     string $separator = ";",
-//     string $enclosure = "\"",
-//     string $escape = "\\"
-// ): array
 
 
 
@@ -30,15 +23,6 @@ for($i = 7 ; $i < count($array); $i+=8){
     );
 }
 
-
-
-// $csv = array_map('str_getcsv', $stringCSV);
-// array_walk($csv, function(&$a) use ($csv) {
-//   $a = array_combine($csv[0], $a);
-// });
-// array_shift($csv); # remove column header
-
 $import = new Import($arrayCSV);
 $text = $import->checkID();
-var_dump($arrayCSV);
 echo $text;
